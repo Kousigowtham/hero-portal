@@ -1,0 +1,13 @@
+.signIn-signUp{
+    position: relative;
+    width: 70vw;
+    display: flex;
+    justify-content: space-between;
+    left: 28vw;
+    top: 5vw;
+}
+.signIn-signUp .signUp{
+    right: 0;
+}
+
+

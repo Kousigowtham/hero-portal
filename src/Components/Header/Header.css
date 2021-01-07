@@ -1,0 +1,35 @@
+.header{
+    width: 20vw;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    background-color: rgb(247, 249, 250);
+}
+span{
+    font-size: 1.25vw;
+}
+.listclass{
+    list-style: none;
+    display: block;
+    position: absolute;
+    width: 100%;
+    margin:none;
+    padding: 0px;
+}
+.link{
+    border-bottom:1px  solid rgba(24, 23, 23);
+    font-size: 16px;
+    text-align: center;
+    display: block;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    padding: 10px 10px 10px 10px;
+    text-decoration: none;
+    color: black;
+    transition: 200ms ease all;
+}
+li:hover .link{
+    font-size: 18px;
+    overflow: hidden;
+}
+
