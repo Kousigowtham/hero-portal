@@ -1,12 +1,33 @@
-import React from 'react'
-import './HomePage.css'
+import React from 'react';
+import './HomePage.css';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { Typography } from '@material-ui/core';
+import { connect } from "react-redux";
+import clsx from 'clsx';
 
-function HomePage() {
+
+
+const useStyles = makeStyles((theme) => ({
+
+  rootOpen: {
+    paddingTop: '70px',
+    paddingLeft:'300px',
+  },
+    rootClose: {
+      paddingTop: '70px',
+      paddingLeft:'100px',
+    },
+  }))
+ 
+function HomePage({isOpen}) {
+    const classes = useStyles();
     return (
-        <div className='homepage'>
-            <h1>HomePage</h1>
-        </div>
+      <div className={isOpen ? classes.rootOpen : classes.rootClose}>
+      <Typography paragraph>This is HomePage</Typography>
+      </div>
     )
 }
-
-export default HomePage
+const mapStateToProps= state=>({
+  isOpen: state.drawer.isOpen
+})
+export default connect(mapStateToProps)(HomePage);

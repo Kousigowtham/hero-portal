@@ -5,54 +5,48 @@ import { LOGINDETAILS } from '../const';
 import './Signup.css'
 
 function Signup() {
-    const [username,setusername]=useState('');
-    const [heroname,setheroname]=useState('');
-    const [password,setpassword]=useState('');
-    const [confirmpassword,setconfirmpassword]=useState('');
-    const [IsJoined,setIsJoined]=useState(false);
+    const [userData,setuserData]=useState({
+        username:'',
+        heroname:'',
+        password:'',
+        confirmpassword:'',
+        IsJoined: false,
+    });
     
     const onSubmit=(event)=>{
         event.preventDefault();
 
-        var ExistingUser= LOGINDETAILS.find(LoginDetail=> LoginDetail.username===username);
+        var ExistingUser= LOGINDETAILS.find(LoginDetail=> LoginDetail.username===userData.username);
         if(ExistingUser===undefined || ExistingUser==null)
         {
             ExistingUser= {"username" : '',"password" : ''}
         }
-        if(ExistingUser.username !==username && confirmpassword ===password)
+        if(ExistingUser.username !==userData.username && userData.confirmpassword ===userData.password)
          {
-                LOGINDETAILS.push({ "username" : username,
-                                    "password" : password   });
+                LOGINDETAILS.push({ "username" : userData.username,
+                                    "password" : userData.password   });
+                setuserData({
+                    username:'',
+                    heroname:'',
+                    password:'',
+                    confirmpassword:'',
+                    IsJoined: true,
+                });
 
-                setheroname('');
-                setpassword('');
-                setusername('');
-                setconfirmpassword('');
-                setIsJoined(true);
          }
          ExistingUser=null;
     }
 const changeHandler=(event)=>{
-
-        switch(event.target.name){
-            case 'username':
-                setusername(()=>event.target.value);
-                break;
-            case 'password':
-               setpassword(()=>event.target.value);
-                break;
-            case 'confirmpassword':
-                setconfirmpassword(()=>event.target.value);
-                break; 
-            case 'heroname':
-                    setheroname(()=>event.target.value);
-                    break; 
+             setuserData({
+                    ...userData,
+                    [event.target.name]: event.target.value,
+            })
         }
-       }
+       
 
     return (
         <React.Fragment>
-            { IsJoined ? (<div style={{padding:'10px 10px', width:'50%',marginLeft :'40px' }}>
+            { userData.IsJoined ? (<div>
                 <h2>Thanks for joining the Hero's Association! Let's save the world together</h2>
             </div> )
         :(            
@@ -65,7 +59,7 @@ const changeHandler=(event)=>{
                            type="text"
                            name="username"
                            label="UserName"
-                           value={username}
+                           value={userData.username}
                            onChange={changeHandler}
                            required
                            />
@@ -73,7 +67,7 @@ const changeHandler=(event)=>{
                            name="heroname"
                            type="text"
                            label="Hero Name"
-                           value={heroname}
+                           value={userData.heroname}
                            onChange={changeHandler}
                            required
                            />
@@ -81,7 +75,7 @@ const changeHandler=(event)=>{
                            name="password"
                            type="password"
                            label="Password"
-                           value={password}
+                           value={userData.password}
                            onChange={changeHandler}
                             required
                             />
@@ -89,7 +83,7 @@ const changeHandler=(event)=>{
                             label="Confirm Password"
                             name="confirmpassword"
                            type="password"
-                           value={confirmpassword}
+                           value={userData.confirmpassword}
                            onChange={changeHandler}
                             required
                             />
