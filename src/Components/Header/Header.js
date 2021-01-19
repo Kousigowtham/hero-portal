@@ -21,6 +21,8 @@ import LockIcon from '@material-ui/icons/Lock';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import { connect } from "react-redux";
 import setDrawerStatus from "../../redux/Drawer/drawerAction";
+import setLoginStatus from '../../redux/User/userAction';
+import {Button } from '@material-ui/core';
 
 
 const drawerWidth = 240;
@@ -89,7 +91,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 
- const Header=({isLogged,isOpen,setDrawerStatus})=> {
+ const Header=({isLogged,isOpen,setDrawerStatus,setLoginStatus})=> {
   const Pages=PAGES();
   const history=useHistory();
   const classes = useStyles();
@@ -129,7 +131,12 @@ const useStyles = makeStyles((theme) => ({
           <Typography variant="h6" noWrap style={{flexGrow:'1'}}>
             Be a HERO!
           </Typography>
-        <IconButton color="inherit" edge="end" onClick={()=>{history.push('/login')}}> { isLogged ? (<LockOpenIcon/>) : (<LockIcon/>)} </IconButton>
+          { isLogged ?
+         
+         (<IconButton color="inherit" edge="end"><Button onClick={()=>{ localStorage.setItem('loginStatus',JSON.stringify({isLogged:false})); setLoginStatus({isLogged:false})}}> SIGNOUT</Button></IconButton>)
+            : null
+      }
+          <IconButton color="inherit" edge="end" onClick={()=>{history.push('/login')}}> { isLogged ? (<LockOpenIcon/>) : (<LockIcon/>)} </IconButton>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -164,7 +171,8 @@ const useStyles = makeStyles((theme) => ({
 }
 
 const mapDispatchToProps=dispatch=>({
-  setDrawerStatus : user=>(dispatch(setDrawerStatus(user)))    
+  setDrawerStatus : user=>(dispatch(setDrawerStatus(user))),
+  setLoginStatus : user=>(dispatch(setLoginStatus(user)))        
 })
 
 const mapStateToProps= state=>({
