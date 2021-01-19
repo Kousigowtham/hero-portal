@@ -2,6 +2,8 @@ const INITIAL_STATE_VALUE={
     isLogged: false
 }
 
+
+
 const userReducer=(state=INITIAL_STATE_VALUE,action)=>{
 
     switch (action.type) {

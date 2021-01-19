@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import { LOGINDETAILS } from '../const';
 import CustomButton from '../CustomButton/Custombutton';
 import FormInput from '../form-input/form-input';
@@ -13,6 +13,11 @@ function SignIn({isLogged,setLoginStatus}) {
         'password':''
     });
 
+if(isLogged){
+}
+
+
+
 const submitHandler= (event)=>{
     event.preventDefault();
     
@@ -26,9 +31,8 @@ const submitHandler= (event)=>{
         window.alert("IncorrectPassword")
     }
     else{
-        console.log(isLogged);
         setLoginStatus({isLogged:true});
-        console.log(isLogged);  
+console.log(isLogged)
 
     }
     setuserData({

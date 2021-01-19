@@ -19,15 +19,9 @@ const useStyles = makeStyles(() => ({
           paddingLeft:'100px'
         },
     CardDetails:{
-            height:'100px',
+            height:'200px',
             overflow:'hidden',
     },
-    CardAddDetails:{
-            height:'100px',
-            overflow:'hidden',
-            margin:'auto'
-   
-      },
 }));
 
 
@@ -48,18 +42,20 @@ const  deleteHandler= (herotobedeleted)=>{
     return (
         <Grid container spacing={4}  className={isOpen ? classes.rootOpen : classes.rootClose}>
         {herolists.map( (hero)=>(   
-        <Grid item xs={6} md={3}> 
-            <Paper elevation={2} variant="outlined">
-                <Cards  deleteHandler={deleteHandler} {...hero} /> 
+            <Grid item xs={6} md={3}  > 
+            <Paper elevation={2} variant="outlined" >
+                <Cards deleteHandler={deleteHandler} {...hero} /> 
             </Paper>
-        </Grid>
+            </Grid>
             ))}
-        <Grid item md={2}> 
+        <Grid item xs={6} md={3}  > 
             <Paper elevation={2} variant="outlined">
-            <Card key='add'className={classes.CardAddDetails}>
+            <Card key='add' style={{display:'flex'}} className={classes.CardDetails}>
+                <CardContent>
                         <IconButton color="inherit" size="medium" onClick={()=>history.push(`heroes/addhero`)}>
                             <AddCircleIcon style={{ fontSize: 50 }}/>
                         </IconButton>
+                        </CardContent>
                 </Card>
                 </Paper>
                 </Grid>
